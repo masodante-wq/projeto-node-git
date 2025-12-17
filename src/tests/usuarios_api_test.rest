@@ -2,29 +2,32 @@
 @id_do_usuario = 3 
  
 ### Listar todos os usuários 
-GET {{baseURL}}/users 
+GET {{baseURL}}/usuarios 
 Accept: application/json 
  
  
 ### Criar um novo usuário 
-POST {{baseURL}}/users 
+POST {{baseURL}}/usuarios 
 Content-Type: application/json 
  
 { 
-  "name": "Carlos Almeida", 
-  "email": "carlos@example.com" 
+  "nome": "Carlos Almeida", 
+  "email": "carlos@example.com",
+  "senha_hash": "senha123",
+  "perfil": "USER" 
 } 
 ### Criar usuário com email inválido (erro esperado) 
-POST {{baseURL}}/users 
+POST {{baseURL}}/usuarios
 Content-Type: application/json 
  
 { 
   "name": "Teste Email Invalido", 
-  "email": "email_invalido" 
+  "email": "email_invalido",
+   "perfil": "teste"
 } 
  
 ### Criar usuário com email repetido (erro esperado) 
-POST {{baseURL}}/users 
+POST {{baseURL}}/usuarios 
 Content-Type: application/json 
  
 { 
@@ -33,7 +36,7 @@ Content-Type: application/json
 } 
  
 ### Atualizar um usuário existente (substitua @id_do_usuario) 
-PUT {{baseURL}}/users/{{id_do_usuario}} 
+PUT {{baseURL}}/usuarios/{{id_do_usuario}} 
 Content-Type: application/json 
  
 { 
@@ -42,16 +45,35 @@ Content-Type: application/json
 } 
  
 ### Atualizar usuário inexistente (erro esperado) 
-PUT {{baseURL}}/users/9999 
+PUT {{baseURL}}/usuarios/9999 
 Content-Type: application/json 
  
 { 
   "name": "Usuario Inexistente", 
-  "email": "inexistente@example.com" 
+  "email": "inexistente@example.com",
+  "senha_hash": "senha123",
+  "perfil": "USER"
 } 
 ### Deletar um usuário existente (substitua @id_do_usuario) 
-DELETE {{baseURL}}/users/{{id_do_usuario}} 
+DELETE {{baseURL}}/usuarios/2
 Accept: application/json 
 ### Deletar um usuário inexistente (erro esperado) 
-DELETE {{baseURL}}/users/9999 
+DELETE {{baseURL}}/usuarios/9999 
 Accept: application/json 
+
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+
+@baseURL = http://localhost:3000
+
+### Criar novo usuário
+POST {{baseURL}}/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Maria Oliveira",
+  "email": "maria@email.com",
+  "senha_hash": "senha123",
+  "perfil": "USER"
+}
+
