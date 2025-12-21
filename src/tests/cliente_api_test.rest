@@ -1,0 +1,90 @@
+@baseURL = http://localhost:3000
+@id_do_cliente = 1
+
+### Listar todos os clientes
+GET {{baseURL}}/clientes
+Accept: application/json
+
+
+### Criar um novo cliente (Pessoa Física)
+POST {{baseURL}}/clientes
+Content-Type: application/json
+
+{
+  "tipo_cliente": "PF",
+  "nome": "João da Silva",
+  "nome_fantasia": null,
+  "documento": "12345678901",
+  "telefone": "(11) 99999-9999",
+  "email": "joao@email.com"
+}
+
+
+### Criar um novo cliente (Pessoa Jurídica)
+POST {{baseURL}}/clientes
+Content-Type: application/json
+
+{
+  "tipo_cliente": "PJ",
+  "nome": "Empresa Exemplo LTDA",
+  "nome_fantasia": "Exemplo Tech",
+  "documento": "12345678000199",
+  "telefone": "(11) 3333-4444",
+  "email": "contato@exemplo.com"
+}
+
+
+### Criar cliente sem documento (erro esperado)
+POST {{baseURL}}/clientes
+Content-Type: application/json
+
+{
+  "tipo_cliente": "PF",
+  "nome": "Cliente Sem Documento"
+}
+
+
+### Criar cliente com documento repetido (erro esperado)
+POST {{baseURL}}/clientes
+Content-Type: application/json
+
+{
+  "tipo_cliente": "PF",
+  "nome": "Cliente Documento Repetido",
+  "documento": "12345678901"
+}
+
+
+### Atualizar um cliente existente (substitua @id_do_cliente)
+PUT {{baseURL}}/clientes/{{id_do_cliente}}
+Content-Type: application/json
+
+{
+  "tipo_cliente": "PF",
+  "nome": "João da Silva Atualizado",
+  "nome_fantasia": null,
+  "documento": "12345678901",
+  "telefone": "(11) 98888-7777",
+  "email": "joao.atualizado@email.com"
+}
+
+
+### Atualizar cliente inexistente (erro esperado)
+PUT {{baseURL}}/clientes/9999
+Content-Type: application/json
+
+{
+  "tipo_cliente": "PF",
+  "nome": "Cliente Inexistente",
+  "documento": "00000000000"
+}
+
+
+### Deletar um cliente existente (substitua @id_do_cliente)
+DELETE {{baseURL}}/clientes/{{id_do_cliente}}
+Accept: application/json
+
+
+### Deletar um cliente inexistente (erro esperado)
+DELETE {{baseURL}}/clientes/9999
+Accept: application/json
