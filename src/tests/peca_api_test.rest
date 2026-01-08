@@ -1,0 +1,51 @@
+@baseURL = http://localhost:3000
+@id_da_peca = 1
+
+### Listar todas as peças
+GET {{baseURL}}/pecas
+Accept: application/json
+
+
+### Criar uma nova peça
+POST {{baseURL}}/pecas
+Content-Type: application/json
+
+{
+  "descricao": "Placa-mãe Dell Inspiron"
+}
+
+
+### Criar peça sem descrição (erro esperado)
+POST {{baseURL}}/pecas
+Content-Type: application/json
+
+{
+}
+
+
+### Atualizar uma peça existente
+PUT {{baseURL}}/pecas/{{id_da_peca}}
+Content-Type: application/json
+
+{
+  "descricao": "Placa-mãe Dell Inspiron Atualizada"
+}
+
+
+### Atualizar peça inexistente (erro esperado)
+PUT {{baseURL}}/pecas/9999
+Content-Type: application/json
+
+{
+  "descricao": "Peça Inexistente"
+}
+
+
+### Deletar uma peça existente
+DELETE {{baseURL}}/pecas/{{id_da_peca}}
+Accept: application/json
+
+
+### Deletar peça inexistente (erro esperado)
+DELETE {{baseURL}}/pecas/9999
+Accept: application/json

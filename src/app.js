@@ -9,6 +9,8 @@ const usuarioRoutes = require('./routes/usuarioRoutes');
 const tecnicoRoutes = require('./routes/tecnicoRoutes');
 const clienteRoutes = require('./routes/clienteRoutes');
 const errorMiddleware = require('./middlewares/errorMiddleware'); 
+const pecaRoutes = require('./routes/pecaRoutes');
+const equipamentoRoutes = require('./routes/equipamentoRoutes');
 // Importa o middleware para tratamento centralizado de erros 
 const app = express(); 
 // Cria uma instância do aplicativo Express 
@@ -32,3 +34,6 @@ module.exports = app;
 // Exporta a aplicação configurada para ser utilizada pelo servidor (server.js) 
 app.use('/tecnicos', tecnicoRoutes);
 app.use('/clientes', clienteRoutes);
+app.use('/pecas', pecaRoutes);
+app.use('/equipamentos', equipamentoRoutes);
+

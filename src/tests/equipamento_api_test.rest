@@ -1,0 +1,60 @@
+@baseURL = http://localhost:3000
+@id_do_equipamento = 1
+
+### Listar todos os equipamentos
+GET {{baseURL}}/equipamentos
+Accept: application/json
+
+
+### Criar um novo equipamento
+POST {{baseURL}}/equipamentos
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "categoria": "Notebook",
+  "marca": "Dell",
+  "modelo": "Inspiron 15",
+  "numero_serie": "ABC123456"
+}
+
+
+### Criar equipamento sem cliente (erro esperado)
+POST {{baseURL}}/equipamentos
+Content-Type: application/json
+
+{
+  "categoria": "Notebook"
+}
+
+
+### Atualizar equipamento existente
+PUT {{baseURL}}/equipamentos/{{id_do_equipamento}}
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "categoria": "Notebook",
+  "marca": "Dell",
+  "modelo": "Inspiron 15 5510",
+  "numero_serie": "ABC123456"
+}
+
+
+### Atualizar equipamento inexistente (erro esperado)
+PUT {{baseURL}}/equipamentos/9999
+Content-Type: application/json
+
+{
+  "cliente_id": 1
+}
+
+
+### Deletar equipamento existente
+DELETE {{baseURL}}/equipamentos/{{id_do_equipamento}}
+Accept: application/json
+
+
+### Deletar equipamento inexistente (erro esperado)
+DELETE {{baseURL}}/equipamentos/9999
+Accept: application/json
